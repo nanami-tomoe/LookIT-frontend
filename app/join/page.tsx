@@ -11,8 +11,7 @@ export default function Join() {
       <div className="w-full flex flex-row items-center gap-4 px-8 py-5 shadow-md bg-[#0B0B0F]/80 z-10">
         {/* 로고 심볼 */}
         <div className="relative w-10 h-10 flex items-center justify-center">
-          <div className="absolute w-10 h-10 rounded-[12px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED]" />
-          <div className="absolute left-1.5 top-1.5 w-7 h-7 rounded-[12px] bg-white" />
+          <Image src="/logo.svg" alt="LOOKIT 로고" width={40} height={40} />
         </div>
         <span className="text-[28px] font-extrabold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-transparent bg-clip-text select-none font-pretendard">
           LOOKIT
