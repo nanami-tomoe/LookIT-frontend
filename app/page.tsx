@@ -4,8 +4,8 @@ export default function Home() {
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0B0B0F]">
       {/* 배경 그라데이션 및 블러 효과 */}
-      <div className="absolute -top-40 -left-40 w-[600px] h-[600px] rounded-full bg-gradient-to-b from-[#00C2FF00] to-[#FF29C3] blur-[200px] opacity-80 z-0" />
-      <div className="absolute -bottom-40 -right-40 w-[600px] h-[600px] rounded-full bg-gradient-to-b from-[#184BFF00] to-[#174AFF] blur-[200px] opacity-80 z-0" />
+      <div className="absolute -top-[500px] -left-[500px] w-[797px] h-[912px] rounded-full bg-gradient-to-b from-[#00C2FF00] to-[#FF29C3] blur-[200px] opacity-70 z-0" />
+      <div className="absolute -bottom-[500px] -right-[500px] w-[797px] h-[912px] rounded-full bg-gradient-to-b from-[#184BFF00] to-[#174AFF] blur-[200px] opacity-70 z-0" />
 
       {/* 메인 컨테이너 */}
       <main className="relative z-10 flex flex-col items-center gap-12 w-full max-w-[1172px] px-4">
@@ -19,7 +19,13 @@ export default function Home() {
               <Image src="/logo.svg" alt="LOOKIT 로고" width={64} height={64} />
             </div>
             {/* LOOKIT 텍스트 */}
-            <span className="text-[40px] font-extrabold leading-[1.2] bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-transparent bg-clip-text select-none font-pretendard">
+            <span
+              className="text-[40px] font-extrabold leading-[1.2] text-transparent bg-clip-text select-none font-pretendard"
+              style={{
+                backgroundImage:
+                  'linear-gradient(36.02deg, #9B51E0 0%, #3081ED 100%)',
+              }}
+            >
               LOOKIT
             </span>
           </div>
