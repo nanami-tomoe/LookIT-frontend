@@ -1,14 +1,24 @@
+'use client';
+
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
+import Background from '@/components/Background';
+// import Header from '@/components/Header';
 
 export default function Home() {
+  const router = useRouter();
+
+  const handleKakaoLogin = () => {
+    // 여기에 실제 카카오 로그인 로직 구현 예정
+    // 현재는 클릭 시 회원가입 페이지(/join)로 이동만 구현
+    router.push('/join');
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden bg-[#0B0B0F]">
-      {/* 배경 그라데이션 및 블러 효과 */}
-      <div className="absolute -top-[500px] -left-[500px] w-[797px] h-[912px] rounded-full bg-gradient-to-b from-[#00C2FF00] to-[#FF29C3] blur-[200px] opacity-70 z-0" />
-      <div className="absolute -bottom-[500px] -right-[500px] w-[797px] h-[912px] rounded-full bg-gradient-to-b from-[#184BFF00] to-[#174AFF] blur-[200px] opacity-70 z-0" />
-
-      {/* 메인 컨테이너 */}
-      <main className="relative z-10 flex flex-col items-center gap-12 w-full max-w-[1172px] px-4">
+      <Background />
+      {/* <Header /> 삭제 */}
+      <main className="relative z-10 flex flex-col items-center justify-center w-full max-w-[1172px] px-4 flex-1">
         {/* 로고 및 텍스트 그룹 */}
         <div className="flex flex-col items-center gap-6 w-full">
           {/* LOOKIT 로고 (피그마 구조 반영) */}
@@ -37,6 +47,7 @@ export default function Home() {
           <button
             type="button"
             className="mt-8 flex items-center justify-center gap-2 w-[320px] h-14 bg-[#FEE500] rounded-lg shadow font-semibold text-[#3C1E1E] text-lg hover:brightness-95 transition-all"
+            onClick={handleKakaoLogin}
           >
             {/* 카카오 로고 SVG */}
             <svg
