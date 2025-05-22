@@ -1,8 +1,18 @@
+'use client';
+
 import Image from 'next/image';
 import Background from '@/components/Background';
 import Header from '@/components/Header';
+import { useRouter } from 'next/navigation';
 
 export default function Join() {
+  const router = useRouter();
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    router.push('/complete');
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-[#0B0B0F]">
       <Background />
@@ -55,7 +65,10 @@ export default function Join() {
               </div>
             </div>
             {/* 회원가입 입력 폼 */}
-            <form className="flex flex-col gap-6 w-full max-w-[353px] mx-auto">
+            <form
+              className="flex flex-col gap-6 w-full max-w-[353px] mx-auto"
+              onSubmit={handleSubmit}
+            >
               {/* 이름 */}
               <div className="flex flex-col gap-2">
                 <label
