@@ -1,17 +1,39 @@
-'use client';
+// pages/login.tsx (Next.js)
+
+'use client'; // 클라이언트 컴포넌트임을 명시
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import Background from '@/components/Background';
-// import Header from '@/components/Header';
+// import Header from '@/components/Header'; // 사용하지 않는다면 삭제
+
+const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!;
+const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI!;
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+  KAKAO_REDIRECT_URI
+)}`;
 
 export default function Login() {
   const router = useRouter();
 
-  const handleKakaoLogin = () => {
-    // 여기에 실제 카카오 로그인 로직 구현 예정
-    // 현재는 클릭 시 회원가입 페이지(/join)로 이동만 구현
-    router.push('/join');
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const accessToken = localStorage.getItem('accessToken');
+      const isMember = localStorage.getItem('isMember');
+      if (accessToken && isMember === 'true') {
+        router.replace('/home');
+      } else if (accessToken && isMember !== 'true') {
+        router.replace('/join');
+      }
+    }
+  }, [router]);
+
+  const handleKakaoLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+    console.log('Spring 서버 카카오 로그인 시작 URL:', KAKAO_AUTH_URL);
+    // window.location.href = KAKAO_AUTH_URL; // 기존 코드 주석 처리
+    window.open(KAKAO_AUTH_URL, '_blank', 'width=500,height=700'); // 새 창으로 인가서버 오픈
   };
 
   return (
@@ -66,8 +88,6 @@ export default function Login() {
             카카오로 시작하기
           </button>
         </div>
-        {/* 이미지/텍스처/추가 요소 자리 (필요시 public에 추가) */}
-        {/* <div className="w-full h-80 bg-gray-800 rounded-2xl opacity-70" /> */}
       </main>
     </div>
   );

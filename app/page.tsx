@@ -2,16 +2,34 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
+import { useEffect } from 'react';
 import Background from '@/components/Background';
 // import Header from '@/components/Header';
 
 export default function Home() {
   const router = useRouter();
 
+  useEffect(() => {
+    // 클라이언트에서만 localStorage 접근
+    if (typeof window !== 'undefined') {
+      const accessToken = localStorage.getItem('accessToken');
+      const isMember = localStorage.getItem('isMember');
+      if (accessToken && isMember === 'true') {
+        router.replace('/home');
+      } else if (accessToken && isMember !== 'true') {
+        router.replace('/join');
+      }
+    }
+  }, [router]);
+
   const handleKakaoLogin = () => {
-    // 여기에 실제 카카오 로그인 로직 구현 예정
-    // 현재는 클릭 시 회원가입 페이지(/join)로 이동만 구현
-    router.push('/join');
+    // 카카오 로그인 URL로 이동
+    const KAKAO_CLIENT_ID = process.env.NEXT_PUBLIC_KAKAO_CLIENT_ID!;
+    const KAKAO_REDIRECT_URI = process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI!;
+    const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${KAKAO_CLIENT_ID}&redirect_uri=${encodeURIComponent(
+      KAKAO_REDIRECT_URI
+    )}`;
+    window.location.href = KAKAO_AUTH_URL;
   };
 
   return (
