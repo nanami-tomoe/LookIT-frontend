@@ -112,7 +112,6 @@ export default function BodySelfTest() {
           <div className="w-[100px] h-[5px] rounded-[5px] bg-[#D9D9D9]" />
           <div className="w-[100px] h-[5px] rounded-[5px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED]" />
           <div className="w-[100px] h-[5px] rounded-[5px] bg-[#D9D9D9]" />
-          <div className="w-[100px] h-[5px] rounded-[5px] bg-[#D9D9D9]" />
         </div>
         <form
           className="flex flex-col gap-8 w-full mt-8"
@@ -438,13 +437,15 @@ export default function BodySelfTest() {
               두께감보다는 손등의 힘줄이 보이는 편
             </label>
           </div>
-          <button
-            type="submit"
-            className="mt-8 w-full max-w-[300px] h-14 rounded-[10px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-white font-semibold text-[18px] font-pretendard shadow hover:brightness-110 transition disabled:opacity-60"
-            disabled={loading || questionKeys.some((k) => !answers[k])}
-          >
-            {loading ? '처리 중...' : '다음 단계로'}
-          </button>
+          <div className="flex justify-center w-full">
+            <button
+              type="submit"
+              className="mt-8 w-full max-w-[300px] h-14 rounded-[10px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-white font-semibold text-[18px] font-pretendard shadow hover:brightness-110 transition disabled:opacity-60 mx-auto"
+              disabled={loading || questionKeys.some((k) => !answers[k])}
+            >
+              {loading ? '처리 중...' : '다음 단계로'}
+            </button>
+          </div>
         </form>
       </main>
     </div>
