@@ -224,24 +224,28 @@ export default function StyleResult() {
   }, []);
 
   useEffect(() => {
-    const fetchTips = async () => {
-      setTipsLoading(true);
-      setTipsError(null);
-      try {
-        const token = localStorage.getItem('accessToken');
-        const res = await axios.get('/api/v0/style-tips', {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-        setStylingTips(res.data?.stylingTips || null);
-      } catch (e) {
+    setTipsLoading(true);
+    setTipsError(null);
+    const token = localStorage.getItem('accessToken');
+    axios
+      .get('/api/v0/style-tips', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then((res) => {
+        if (res.data?.stylingTips) {
+          setStylingTips(res.data.stylingTips);
+        } else {
+          console.error('스타일 팁 응답 형식 오류:', res.data);
+          setStylingTips(null);
+        }
+      })
+      .catch((e) => {
+        console.error('스타일 팁 API 에러:', e);
         setTipsError('스타일 팁을 불러오지 못했습니다.');
-      } finally {
-        setTipsLoading(false);
-      }
-    };
-    fetchTips();
+      })
+      .finally(() => setTipsLoading(false));
   }, []);
 
   useEffect(() => {
