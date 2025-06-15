@@ -10,35 +10,7 @@ export default function StyleIntro() {
   const [loading, setLoading] = useState(false);
 
   const handleStart = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem('accessToken');
-      const res = await axios.get(
-        'http://localhost:8080/api/v0/style-analysis/result',
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log('API 응답:', res.data);
-      const data = res.data?.data;
-      if (
-        data &&
-        data.bodyAnalysis &&
-        data.bodyType &&
-        data.faceShape &&
-        data.faceMood
-      ) {
-        router.push('/style/result');
-      } else {
-        router.push('/style/upload');
-      }
-    } catch (e) {
-      router.push('/style/upload');
-    } finally {
-      setLoading(false);
-    }
+    router.push('/style/upload');
   };
 
   return (

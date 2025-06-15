@@ -43,7 +43,7 @@ export default function Fitting() {
       formData.append('clothes', clothFile);
       const token = localStorage.getItem('accessToken');
       const res = await axios.post(
-        'http://localhost:8080/api/v0/virtual-fitting',
+        'http://54.180.245.50/api/v0/virtual-fitting',
         formData,
         {
           headers: {

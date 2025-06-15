@@ -39,7 +39,7 @@ export default function StyleUpload() {
       const bodyForm = new FormData();
       bodyForm.append('analysis', bodyFile);
       const bodyRes = await axios.post(
-        'http://localhost:8080/api/v0/body-analysis',
+        'http://54.180.245.50/api/v0/body-analysis',
         bodyForm,
         {
           headers: {
@@ -53,7 +53,7 @@ export default function StyleUpload() {
       const faceForm = new FormData();
       faceForm.append('analysis', faceFile);
       const faceRes = await axios.post(
-        'http://localhost:8080/api/v0/face-analysis',
+        'http://54.180.245.50/api/v0/face-analysis',
         faceForm,
         {
           headers: {
@@ -68,6 +68,7 @@ export default function StyleUpload() {
       setError(
         e?.response?.data?.message || '이미지 분석 요청에 실패했습니다.'
       );
+      console.log('이미지 업로드 에러:', e);
     } finally {
       setLoading(false);
     }
