@@ -40,7 +40,7 @@ export default function Join() {
 
     try {
       const response = await axios.patch(
-        'http://54.180.245.50/api/sign-up', // 실제 엔드포인트로 수정
+        '/api/sign-up', // 실제 엔드포인트로 수정
         {
           name,
           gender, // 'M' 또는 'W'

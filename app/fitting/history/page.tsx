@@ -33,14 +33,11 @@ export default function FittingHistory() {
       setError(null);
       try {
         const token = localStorage.getItem('accessToken');
-        const res = await axios.get(
-          'http://54.180.245.50/api/v0/virtual-fitting/result',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axios.get('/api/v0/virtual-fitting/result', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         console.log('가상피팅 결과 API 응답:', res.data);
         setResults(res.data?.data || []);
       } catch (e: any) {
