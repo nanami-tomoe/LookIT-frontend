@@ -31,9 +31,7 @@ export default function Login() {
 
   const handleKakaoLogin = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    console.log('Spring 서버 카카오 로그인 시작 URL:', KAKAO_AUTH_URL);
-    // window.location.href = KAKAO_AUTH_URL; // 기존 코드 주석 처리
-    window.open(KAKAO_AUTH_URL, '_blank', 'width=500,height=700'); // 새 창으로 인가서버 오픈
+    window.location.href = KAKAO_AUTH_URL; // 새 창이 아닌 현재 창에서 이동
   };
 
   return (
