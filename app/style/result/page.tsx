@@ -107,6 +107,87 @@ const resultCardMeta = [
   },
 ];
 
+// 얼굴 골격 유형별 추천 스타일 데이터 상수 추가
+const FACE_BONE_STYLES = [
+  {
+    type: '직선 골격형',
+    code: 'STRAIGHT_SKELETON',
+    desc: '얼굴에 뼈가 입체감을 담당, 콧대와 턱선, 티존이 뚜렷함',
+    styles: [
+      '오피스룩',
+      '시크룩',
+      '미니멀룩',
+      '프레피룩',
+      '드뮤어룩',
+      '젠더리스룩',
+      '댄디룩',
+    ],
+    detail: [
+      '직선적인 실루엣이 잘 어울림',
+      '구조적인 핏과 깔끔한 라인 강조',
+      '하이넥, 테일러드, 셔츠류 잘 받음',
+    ],
+    keywords: ['시크', '모던', '섹시', '심플', '직선', '중성적', '도회적'],
+    hair: [
+      '미디움 길이: 너무 곡선의 둥근 느낌이 나지 않도록 스트레이트 또는 아웃컬',
+      '긴 머리: 컬이 없는 자연스러운 스트레이트 롱 헤어 또는 묶은머리',
+      '페이스라인컷, 허쉬컷, 네추럴업',
+    ],
+    hairImages: ['/faceline.png', '/hush.png', '/naturalup.png'],
+  },
+  {
+    type: '곡선 볼륨형',
+    code: 'CURVED_VOLUME',
+    desc: '얼굴의 볼륨감이 부드럽게 느껴짐, 도톰한 이마와 앞광대가 볼륨을 담당',
+    styles: [
+      '러블리룩',
+      '로맨틱룩',
+      '코티지코어룩',
+      '보헤미안룩',
+      '빈티지룩',
+      '오버핏룩',
+    ],
+    detail: [
+      '곡선 디테일이 있는 옷이 잘 어울림',
+      '프릴, 러플, 플라워, 레이스 추천',
+      '둥근 카라나 A라인 스커트와 궁합 좋음',
+    ],
+    keywords: ['러블리', '귀여움', '여성스러움', '부드러움', '볼륨'],
+    hair: [
+      '긴머리 & 미디움 길이: 컬이 있는 펌',
+      '단발: 굵은 C컬이 들어간 볼륨감 있는 단발',
+      '빌드펌, 엘리자벳펌, 로우번',
+    ],
+    hairImages: ['/build.png', '/elizabeth.png', '/lowbun.png'],
+  },
+  {
+    type: '밸런스형',
+    code: 'BALANCE_TYPE',
+    desc: '직선/곡선이 혼합된 중간형',
+    styles: [
+      '모던룩',
+      '컨템포러리룩',
+      '미니멀룩',
+      '오버핏룩',
+      '프레피룩',
+      '젠더리스룩',
+      '빈티지룩',
+    ],
+    detail: [
+      '어느 정도 스타일을 두루 소화',
+      '실루엣에 따라 직선/곡선 강조 가능',
+    ],
+    keywords: ['자연스러움', '적절한균형', '페미닌'],
+    hair: [
+      '긴머리: 자연스럽고 느슨하게 흐르는 컬',
+      '미디움 길이: 스트레이트한 헤어의 경우 부드러운 아웃컬을 넣어주거나 앞머리나 윗 볼륨으로 곡선요소 섞기',
+      '단발: 끝처리가 샤프하지 않은 C컬펌',
+      '프릴펌, 포니테일, 보니펌',
+    ],
+    hairImages: ['/pril.png', '/ponytail.png', '/ccurl.png'],
+  },
+];
+
 export default function StyleResult() {
   const router = useRouter();
   const [result, setResult] = useState<StyleResultData | null>(null);
@@ -218,7 +299,61 @@ export default function StyleResult() {
                 02 얼굴 분위기에 따른 추천 스타일
               </h2>
               <div className="w-full h-[1px] bg-[#E5E5EA] mb-8" />
-              <div className="text-[#aaa] text-base">(추후 제공 예정)</div>
+              {loading ? (
+                <div className="text-[#9B51E0] text-lg font-bold py-12">
+                  결과를 불러오는 중...
+                </div>
+              ) : error ? (
+                <div className="text-red-500 text-lg font-bold py-12">
+                  {error}
+                </div>
+              ) : result && result.faceMood ? (
+                (() => {
+                  const data = FACE_BONE_STYLES.find(
+                    (item) => item.code === result.faceMood
+                  );
+                  if (!data) return <div>분석 결과를 찾을 수 없습니다.</div>;
+                  return (
+                    <div className="rounded-xl bg-white/90 p-8 shadow-lg max-w-2xl mx-auto">
+                      <h3 className="text-xl font-bold mb-2">{data.type}</h3>
+                      <div className="text-gray-600 mb-4">{data.desc}</div>
+                      <div className="mb-4">
+                        <b>추천 스타일:</b> {data.styles.join(', ')}
+                      </div>
+                      <ul className="mb-4 list-disc pl-5">
+                        {data.detail.map((d, i) => (
+                          <li key={i}>{d}</li>
+                        ))}
+                      </ul>
+                      <div className="mb-4">
+                        <b>키워드:</b> {data.keywords.join(', ')}
+                      </div>
+                      <div className="mb-4">
+                        <b>추천 헤어스타일:</b>
+                        <ul className="list-disc pl-5">
+                          {data.hair.map((h, i) => (
+                            <li key={i}>{h}</li>
+                          ))}
+                        </ul>
+                        <div className="flex gap-2 mt-2">
+                          {data.hairImages.map((src, i) => (
+                            <img
+                              key={i}
+                              src={src}
+                              alt="헤어스타일 예시"
+                              className="w-24 h-24 object-cover rounded-lg border"
+                            />
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  );
+                })()
+              ) : (
+                <div className="text-[#aaa] text-base">
+                  분석 결과가 없습니다.
+                </div>
+              )}
             </div>
             <div className="mt-16">
               <h2 className="text-[22px] font-bold text-[#9B51E0] mb-4">
