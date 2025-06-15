@@ -201,6 +201,7 @@ export default function StyleResult() {
   );
   const [brandsLoading, setBrandsLoading] = useState(true);
   const [brandsError, setBrandsError] = useState<string | null>(null);
+  const [selectedSection, setSelectedSection] = useState('section-00');
 
   useEffect(() => {
     const fetchResult = async () => {
@@ -273,9 +274,14 @@ export default function StyleResult() {
       .finally(() => setBrandsLoading(false));
   }, []);
 
+  const handleNavClick = (sectionId: string) => {
+    setSelectedSection(sectionId);
+    document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="relative min-h-screen flex flex-col bg-[#F5F5F7]">
-      <Header />
+      <Header darkText />
       <div className="flex flex-row w-full min-h-screen">
         {/* 좌측 사이드바 목차 */}
         <aside className="hidden md:flex flex-col w-[260px] bg-white border-r border-[#E5E5EA] py-12 px-8 gap-8 sticky top-0 h-screen z-20 shadow-sm">
@@ -284,42 +290,42 @@ export default function StyleResult() {
           </div>
           <nav className="flex flex-col gap-0 w-full">
             <div
-              className="py-3 text-[#9B51E0] font-bold border-b border-[#E5E5EA] bg-[#f7f3ff] cursor-pointer"
-              onClick={() =>
-                document
-                  .getElementById('section-00')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }
+              className={`py-3 border-b border-[#E5E5EA] cursor-pointer ${
+                selectedSection === 'section-00'
+                  ? 'text-[#9B51E0] font-bold bg-[#f7f3ff]'
+                  : 'text-[#666] hover:bg-[#f7f3ff]'
+              }`}
+              onClick={() => handleNavClick('section-00')}
             >
               00 자가진단 및 머신러닝 분석 결과
             </div>
             <div
-              className="py-3 text-[#666] border-b border-[#E5E5EA] hover:bg-[#f7f3ff] cursor-pointer"
-              onClick={() =>
-                document
-                  .getElementById('section-01')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }
+              className={`py-3 border-b border-[#E5E5EA] cursor-pointer ${
+                selectedSection === 'section-01'
+                  ? 'text-[#9B51E0] font-bold bg-[#f7f3ff]'
+                  : 'text-[#666] hover:bg-[#f7f3ff]'
+              }`}
+              onClick={() => handleNavClick('section-01')}
             >
               01 체형 보완 스타일 팁
             </div>
             <div
-              className="py-3 text-[#666] border-b border-[#E5E5EA] hover:bg-[#f7f3ff] cursor-pointer"
-              onClick={() =>
-                document
-                  .getElementById('section-02')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }
+              className={`py-3 border-b border-[#E5E5EA] cursor-pointer ${
+                selectedSection === 'section-02'
+                  ? 'text-[#9B51E0] font-bold bg-[#f7f3ff]'
+                  : 'text-[#666] hover:bg-[#f7f3ff]'
+              }`}
+              onClick={() => handleNavClick('section-02')}
             >
               02 얼굴 분위기에 따른 추천 스타일
             </div>
             <div
-              className="py-3 text-[#666] hover:bg-[#f7f3ff] cursor-pointer"
-              onClick={() =>
-                document
-                  .getElementById('section-03')
-                  ?.scrollIntoView({ behavior: 'smooth' })
-              }
+              className={`py-3 cursor-pointer ${
+                selectedSection === 'section-03'
+                  ? 'text-[#9B51E0] font-bold bg-[#f7f3ff]'
+                  : 'text-[#666] hover:bg-[#f7f3ff]'
+              }`}
+              onClick={() => handleNavClick('section-03')}
             >
               03 바디타입과 얼굴 분위기에 따른 브랜드 추천
             </div>
