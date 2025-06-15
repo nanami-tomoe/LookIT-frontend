@@ -72,40 +72,46 @@ export default function FittingHistory() {
             </div>
           ) : error ? (
             <div className="text-red-500 text-center py-12 w-full">{error}</div>
-          ) : results.filter((item) => !!item.resultImageUrl).length === 0 ? (
+          ) : results.length === 0 ? (
             <div className="text-[#aaa] text-center py-12 w-full">
-              완료된 가상피팅 결과가 없습니다.
+              가상피팅 결과가 없습니다.
             </div>
           ) : (
-            results
-              .filter((item) => !!item.resultImageUrl)
-              .map((item, idx) => (
-                <div
-                  key={item.resultImageUrl + item.createdAt + idx}
-                  className="group relative bg-white/95 rounded-2xl shadow-xl border border-[#e5e5e5] flex flex-col items-center justify-between w-full max-w-[240px] h-[280px] p-4 mx-auto overflow-hidden hover:scale-105 hover:shadow-2xl transition-transform duration-200"
-                >
-                  <div className="relative w-full h-[170px] flex items-center justify-center bg-[#f7f7fa] rounded-xl border border-[#e5e5e5] cursor-pointer overflow-hidden">
-                    <Image
-                      src={item.resultImageUrl}
-                      alt="result"
-                      width={180}
-                      height={170}
-                      className="object-contain w-full h-full rounded-xl transition-transform duration-200 group-hover:scale-110"
-                      style={{ background: '#f7f7fa' }}
-                    />
-                    {/* 오버레이 + 돋보기 아이콘 */}
-                    <div
-                      className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-200"
-                      onClick={() => setModalImg(item.resultImageUrl)}
-                    >
-                      <FaSearchPlus className="text-white text-3xl drop-shadow-lg" />
-                    </div>
-                  </div>
-                  <div className="mt-4 px-3 py-1 bg-[#f7f7fa] rounded-full text-xs text-[#666] font-mono w-fit mx-auto shadow-sm border border-[#ececec]">
-                    피팅 완료: {formatDate(item.createdAt)}
-                  </div>
+            results.map((item, idx) => (
+              <div
+                key={item.resultImageUrl + item.createdAt + idx}
+                className="group relative bg-white/95 rounded-2xl shadow-xl border border-[#e5e5e5] flex flex-col items-center justify-between w-full max-w-[240px] h-[280px] p-4 mx-auto overflow-hidden hover:scale-105 hover:shadow-2xl transition-transform duration-200"
+              >
+                <div className="relative w-full h-[170px] flex items-center justify-center bg-[#f7f7fa] rounded-xl border border-[#e5e5e5] cursor-pointer overflow-hidden">
+                  {item.resultImageUrl ? (
+                    <>
+                      <Image
+                        src={item.resultImageUrl}
+                        alt="result"
+                        width={180}
+                        height={170}
+                        className="object-contain w-full h-full rounded-xl transition-transform duration-200 group-hover:scale-110"
+                        style={{ background: '#f7f7fa' }}
+                      />
+                      {/* 오버레이 + 돋보기 아이콘 */}
+                      <div
+                        className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-100 flex items-center justify-center transition-opacity duration-200"
+                        onClick={() => setModalImg(item.resultImageUrl)}
+                      >
+                        <FaSearchPlus className="text-white text-3xl drop-shadow-lg" />
+                      </div>
+                    </>
+                  ) : (
+                    <span className="text-[#aaa] text-base">
+                      이미지 생성중...
+                    </span>
+                  )}
                 </div>
-              ))
+                <div className="mt-4 px-3 py-1 bg-[#f7f7fa] rounded-full text-xs text-[#666] font-mono w-fit mx-auto shadow-sm border border-[#ececec]">
+                  {item.resultImageUrl ? '생성완료' : '생성중'}
+                </div>
+              </div>
+            ))
           )}
         </div>
         {/* 이미지 확대 모달 */}
