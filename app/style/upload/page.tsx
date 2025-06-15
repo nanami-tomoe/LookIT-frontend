@@ -38,30 +38,22 @@ export default function StyleUpload() {
       // 체형 분석 요청
       const bodyForm = new FormData();
       bodyForm.append('analysis', bodyFile);
-      const bodyRes = await axios.post(
-        'http://54.180.245.50/api/v0/body-analysis',
-        bodyForm,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const bodyRes = await axios.post('/api/v0/body-analysis', bodyForm, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log('체형 분석 응답:', bodyRes.data);
       // 얼굴 분석 요청
       const faceForm = new FormData();
       faceForm.append('analysis', faceFile);
-      const faceRes = await axios.post(
-        'http://54.180.245.50/api/v0/face-analysis',
-        faceForm,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const faceRes = await axios.post('/api/v0/face-analysis', faceForm, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       console.log('얼굴 분석 응답:', faceRes.data);
       router.push('/style/selftest/body');
     } catch (e: any) {

@@ -203,14 +203,11 @@ export default function StyleResult() {
       setError(null);
       try {
         const token = localStorage.getItem('accessToken');
-        const res = await axios.get(
-          'http://54.180.245.50/api/v0/style-analysis/result',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axios.get('/api/v0/style-analysis/result', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         setResult(res.data?.data || null);
       } catch (err) {
         setError('결과를 불러오지 못했습니다.');
@@ -227,7 +224,7 @@ export default function StyleResult() {
       setTipsError(null);
       try {
         const token = localStorage.getItem('accessToken');
-        const res = await axios.get('http://54.180.245.50/api/v0/style-tips', {
+        const res = await axios.get('/api/v0/style-tips', {
           headers: {
             Authorization: `Bearer ${token}`,
           },
