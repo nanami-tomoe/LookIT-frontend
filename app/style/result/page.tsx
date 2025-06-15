@@ -247,8 +247,13 @@ export default function StyleResult() {
   useEffect(() => {
     setBrandsLoading(true);
     setBrandsError(null);
+    const token = localStorage.getItem('accessToken');
     axios
-      .get('/api/v0/brands/recommendation')
+      .get('/api/v0/brands/recommendation', {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
       .then((res) => {
         if (res.data?.success && Array.isArray(res.data.data)) {
           setBrands(res.data.data);
