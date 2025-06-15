@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import type { RouteHandlerContext } from 'next';
 
 const API_BASE = 'http://54.180.245.50';
 
@@ -11,8 +12,9 @@ function buildTargetUrl(params: { slug?: string[] }, req: NextRequest) {
 async function proxyRequest(
   req: NextRequest,
   method: string,
-  params: { slug?: string[] }
+  context: RouteHandlerContext
 ) {
+  const params = context.params as { slug?: string[] };
   const url = buildTargetUrl(params, req);
   const headers: Record<string, string> = {};
   req.headers.forEach((value, key) => {
@@ -53,33 +55,18 @@ async function proxyRequest(
   }
 }
 
-export async function GET(
-  req: NextRequest,
-  { params }: { params: { slug?: string[] } }
-) {
-  return proxyRequest(req, 'GET', params);
+export async function GET(req: NextRequest, context: RouteHandlerContext) {
+  return proxyRequest(req, 'GET', context);
 }
-export async function POST(
-  req: NextRequest,
-  { params }: { params: { slug?: string[] } }
-) {
-  return proxyRequest(req, 'POST', params);
+export async function POST(req: NextRequest, context: RouteHandlerContext) {
+  return proxyRequest(req, 'POST', context);
 }
-export async function PUT(
-  req: NextRequest,
-  { params }: { params: { slug?: string[] } }
-) {
-  return proxyRequest(req, 'PUT', params);
+export async function PUT(req: NextRequest, context: RouteHandlerContext) {
+  return proxyRequest(req, 'PUT', context);
 }
-export async function PATCH(
-  req: NextRequest,
-  { params }: { params: { slug?: string[] } }
-) {
-  return proxyRequest(req, 'PATCH', params);
+export async function PATCH(req: NextRequest, context: RouteHandlerContext) {
+  return proxyRequest(req, 'PATCH', context);
 }
-export async function DELETE(
-  req: NextRequest,
-  { params }: { params: { slug?: string[] } }
-) {
-  return proxyRequest(req, 'DELETE', params);
+export async function DELETE(req: NextRequest, context: RouteHandlerContext) {
+  return proxyRequest(req, 'DELETE', context);
 }
