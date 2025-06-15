@@ -196,6 +196,11 @@ export default function StyleResult() {
   const [stylingTips, setStylingTips] = useState<string | null>(null);
   const [tipsLoading, setTipsLoading] = useState(true);
   const [tipsError, setTipsError] = useState<string | null>(null);
+  const [brands, setBrands] = useState<{ name: string; url: string }[] | null>(
+    null
+  );
+  const [brandsLoading, setBrandsLoading] = useState(true);
+  const [brandsError, setBrandsError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchResult = async () => {
@@ -237,6 +242,22 @@ export default function StyleResult() {
       }
     };
     fetchTips();
+  }, []);
+
+  useEffect(() => {
+    setBrandsLoading(true);
+    setBrandsError(null);
+    axios
+      .get('/api/v0/brands/recommendation')
+      .then((res) => {
+        if (res.data?.success && Array.isArray(res.data.data)) {
+          setBrands(res.data.data);
+        } else {
+          setBrandsError('브랜드 추천 데이터를 불러오지 못했습니다.');
+        }
+      })
+      .catch(() => setBrandsError('브랜드 추천 데이터를 불러오지 못했습니다.'))
+      .finally(() => setBrandsLoading(false));
   }, []);
 
   return (
@@ -395,7 +416,38 @@ export default function StyleResult() {
                 03 바디타입과 얼굴 분위기에 따른 브랜드 추천
               </h2>
               <div className="w-full h-[1px] bg-[#E5E5EA] mb-8" />
-              <div className="text-[#aaa] text-base">(추후 제공 예정)</div>
+              {brandsLoading ? (
+                <div className="text-[#9B51E0] text-lg font-bold py-12">
+                  브랜드 추천을 불러오는 중...
+                </div>
+              ) : brandsError ? (
+                <div className="text-red-500 text-lg font-bold py-12">
+                  {brandsError}
+                </div>
+              ) : brands && brands.length > 0 ? (
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                  {brands.map((brand, i) => (
+                    <a
+                      key={brand.name + brand.url}
+                      href={brand.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block rounded-xl bg-white/90 shadow p-6 hover:shadow-lg transition border border-[#e5e5e5] hover:border-[#b982ff] group"
+                    >
+                      <div className="text-[18px] font-bold text-[#222] group-hover:text-[#9B51E0] mb-2 truncate">
+                        {i + 1}. {brand.name}
+                      </div>
+                      <div className="text-[14px] text-[#3081ED] underline break-all">
+                        {brand.url}
+                      </div>
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <div className="text-[#aaa] text-base">
+                  추천 브랜드가 없습니다.
+                </div>
+              )}
             </div>
           </div>
         </main>
