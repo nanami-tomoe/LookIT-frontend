@@ -253,10 +253,14 @@ export default function StyleResult() {
         if (res.data?.success && Array.isArray(res.data.data)) {
           setBrands(res.data.data);
         } else {
+          console.error('브랜드 추천 응답 형식 오류:', res.data);
           setBrandsError('브랜드 추천 데이터를 불러오지 못했습니다.');
         }
       })
-      .catch(() => setBrandsError('브랜드 추천 데이터를 불러오지 못했습니다.'))
+      .catch((err) => {
+        console.error('브랜드 추천 API 에러:', err);
+        setBrandsError('브랜드 추천 데이터를 불러오지 못했습니다.');
+      })
       .finally(() => setBrandsLoading(false));
   }, []);
 
