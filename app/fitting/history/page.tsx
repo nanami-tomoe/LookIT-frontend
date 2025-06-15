@@ -80,16 +80,16 @@ export default function FittingHistory() {
             results.map((item, idx) => (
               <div
                 key={item.resultImageUrl + item.createdAt + idx}
-                className="group relative bg-white/95 rounded-2xl shadow-xl border border-[#e5e5e5] flex flex-col items-center justify-between w-full max-w-[240px] h-[280px] p-4 mx-auto overflow-hidden hover:scale-105 hover:shadow-2xl transition-transform duration-200"
+                className="group relative bg-white/95 rounded-2xl shadow-xl border border-[#e5e5e5] flex flex-col items-center justify-between w-full max-w-[320px] h-[360px] p-6 mx-auto overflow-hidden hover:scale-105 hover:shadow-2xl transition-transform duration-200"
               >
-                <div className="relative w-full h-[170px] flex items-center justify-center bg-[#f7f7fa] rounded-xl border border-[#e5e5e5] cursor-pointer overflow-hidden">
+                <div className="relative w-full h-[220px] flex items-center justify-center bg-[#f7f7fa] rounded-xl border border-[#e5e5e5] cursor-pointer overflow-hidden">
                   {item.resultImageUrl ? (
                     <>
                       <Image
                         src={item.resultImageUrl}
                         alt="result"
-                        width={180}
-                        height={170}
+                        width={260}
+                        height={220}
                         className="object-contain w-full h-full rounded-xl transition-transform duration-200 group-hover:scale-110"
                         style={{ background: '#f7f7fa' }}
                       />
