@@ -42,16 +42,12 @@ export default function Fitting() {
       formData.append('body', userFile);
       formData.append('clothes', clothFile);
       const token = localStorage.getItem('accessToken');
-      const res = await axios.post(
-        'http://54.180.245.50/api/v0/virtual-fitting',
-        formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const res = await axios.post('/api/v0/virtual-fitting', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const taskId = res.data?.data?.imageTaskId;
       setImageTaskId(taskId || null);
       setStatus('success');

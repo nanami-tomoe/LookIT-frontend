@@ -23,7 +23,7 @@ function KakaoCallback() {
 
     if (code) {
       axios
-        .post('http://54.180.245.50/api/auth/login/kakao', { code })
+        .post('/api/auth/login/kakao', { code })
         .then((res: AxiosResponse) => {
           const { data, status } = res.data;
           if (status === 'SUCCESS' && data) {
