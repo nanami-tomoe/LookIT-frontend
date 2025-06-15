@@ -109,7 +109,7 @@ export default function Fitting() {
                 <span className="text-white text-lg font-bold">i</span>
               </div>
               <span className="text-[#898CA9] text-[14px]">
-                얼굴이 잘 나온 정면 사진을 권장해요
+                배경이 깔끔하고 정면이 잘 나온 사진을 권장해요
               </span>
             </div>
           </section>
@@ -150,7 +150,7 @@ export default function Fitting() {
                 <span className="text-white text-lg font-bold">i</span>
               </div>
               <span className="text-[#898CA9] text-[14px]">
-                정면이 잘 보이는 옷 이미지를 권장해요
+                정면이 잘 보이고 옷만 단독으로 있는 이미지를 권장해요
               </span>
             </div>
           </section>

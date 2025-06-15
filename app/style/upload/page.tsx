@@ -146,13 +146,21 @@ export default function StyleUpload() {
                 </span>
               )}
             </div>
-            <div className="mt-2 flex flex-row items-center gap-2 w-full">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#982dec] via-[#dc8df8] to-[#a9c4f3] flex items-center justify-center">
-                <span className="text-white text-xs font-bold">i</span>
+            <div className="mt-2 flex flex-col items-start gap-2 w-full">
+              <div className="flex flex-row items-center gap-2">
+                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#982dec] via-[#dc8df8] to-[#a9c4f3] flex items-center justify-center">
+                  <span className="text-white text-xs font-bold">i</span>
+                </div>
+                <span className="text-[#898CA9] text-[13px]">
+                  반드시 머리부터 발끝까지 나오고, 달라붙는 옷을 입고 양쪽 팔이
+                  몸에서 떨어져 있어야 해요.
+                </span>
               </div>
-              <span className="text-[#898CA9] text-[13px]">
-                정면 사진, 체형이 잘 드러나는 환경
-              </span>
+              <img
+                src="/ex.jpg"
+                alt="체형 사진 예시"
+                className="mt-2 rounded-lg border border-[#e5e5e5] max-w-full max-h-[120px] object-contain bg-white"
+              />
             </div>
           </div>
         </div>
