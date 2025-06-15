@@ -15,6 +15,7 @@ export default function StyleUpload() {
   const faceInputRef = useRef<HTMLInputElement>(null);
   const bodyInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
+  const [showModal, setShowModal] = useState(false);
 
   const handleFaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -155,12 +156,44 @@ export default function StyleUpload() {
                   반드시 머리부터 발끝까지 나오고, 달라붙는 옷을 입고 양쪽 팔이
                   몸에서 떨어져 있어야 해요.
                 </span>
+                <button
+                  type="button"
+                  className="ml-2 p-0.5 rounded hover:bg-[#f3f3fa] border border-[#e5e5e5] transition"
+                  onClick={() => setShowModal(true)}
+                  aria-label="체형 사진 예시 크게 보기"
+                >
+                  <img
+                    src="/ex.jpg"
+                    alt="체형 사진 예시 썸네일"
+                    className="w-8 h-8 object-cover rounded"
+                  />
+                </button>
               </div>
-              <img
-                src="/ex.jpg"
-                alt="체형 사진 예시"
-                className="mt-2 rounded-lg border border-[#e5e5e5] max-w-full max-h-[120px] object-contain bg-white"
-              />
+              {/* 모달 */}
+              {showModal && (
+                <div
+                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+                  onClick={() => setShowModal(false)}
+                >
+                  <div
+                    className="bg-white rounded-lg p-4 max-w-[90vw] max-h-[90vh] flex flex-col items-center relative"
+                    onClick={(e) => e.stopPropagation()}
+                  >
+                    <img
+                      src="/ex.jpg"
+                      alt="체형 사진 예시 크게 보기"
+                      className="max-w-[80vw] max-h-[70vh] object-contain rounded"
+                    />
+                    <button
+                      className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl font-bold"
+                      onClick={() => setShowModal(false)}
+                      aria-label="닫기"
+                    >
+                      ×
+                    </button>
+                  </div>
+                </div>
+              )}
             </div>
           </div>
         </div>
