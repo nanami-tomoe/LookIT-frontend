@@ -1,10 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
-import type { RouteHandlerContext } from 'next';
 
 const API_BASE = 'http://54.180.245.50';
 
 function buildTargetUrl(params: { slug?: string[] }, req: NextRequest) {
-  const path = params.slug ? '/' + params.slug.join('/') : '';
+  const path = params?.slug ? '/' + params.slug.join('/') : '';
   const search = req.nextUrl.search || '';
   return `${API_BASE}${path}${search}`;
 }
@@ -12,9 +11,8 @@ function buildTargetUrl(params: { slug?: string[] }, req: NextRequest) {
 async function proxyRequest(
   req: NextRequest,
   method: string,
-  context: RouteHandlerContext
+  params: { slug?: string[] }
 ) {
-  const params = context.params as { slug?: string[] };
   const url = buildTargetUrl(params, req);
   const headers: Record<string, string> = {};
   req.headers.forEach((value, key) => {
@@ -55,18 +53,23 @@ async function proxyRequest(
   }
 }
 
-export async function GET(req: NextRequest, context: RouteHandlerContext) {
-  return proxyRequest(req, 'GET', context);
+export async function GET(req: NextRequest, context: any) {
+  const params = context.params as { slug?: string[] };
+  return proxyRequest(req, 'GET', params);
 }
-export async function POST(req: NextRequest, context: RouteHandlerContext) {
-  return proxyRequest(req, 'POST', context);
+export async function POST(req: NextRequest, context: any) {
+  const params = context.params as { slug?: string[] };
+  return proxyRequest(req, 'POST', params);
 }
-export async function PUT(req: NextRequest, context: RouteHandlerContext) {
-  return proxyRequest(req, 'PUT', context);
+export async function PUT(req: NextRequest, context: any) {
+  const params = context.params as { slug?: string[] };
+  return proxyRequest(req, 'PUT', params);
 }
-export async function PATCH(req: NextRequest, context: RouteHandlerContext) {
-  return proxyRequest(req, 'PATCH', context);
+export async function PATCH(req: NextRequest, context: any) {
+  const params = context.params as { slug?: string[] };
+  return proxyRequest(req, 'PATCH', params);
 }
-export async function DELETE(req: NextRequest, context: RouteHandlerContext) {
-  return proxyRequest(req, 'DELETE', context);
+export async function DELETE(req: NextRequest, context: any) {
+  const params = context.params as { slug?: string[] };
+  return proxyRequest(req, 'DELETE', params);
 }
