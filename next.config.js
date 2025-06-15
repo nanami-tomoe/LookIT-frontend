@@ -8,4 +8,12 @@ module.exports = {
       'v3.fal.media',
     ],
   },
+  async rewrites() {
+    return [
+      {
+        source: '/api/:slug*',
+        destination: `${process.env.NEXT_PUBLIC_API_URL}/:slug*`,
+      },
+    ];
+  },
 };
