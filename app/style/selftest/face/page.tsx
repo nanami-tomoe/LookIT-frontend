@@ -18,14 +18,11 @@ export default function FaceSelfTest() {
       setFaceError(null);
       try {
         const token = localStorage.getItem('accessToken');
-        const res = await axios.get(
-          'http://54.180.245.50/api/v0/face-analysis/result',
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+        const res = await axios.get('/api/v0/face-analysis/result', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
         const result = res.data?.data;
         if (result === '진행중') {
           setFaceError('얼굴형 분석이 아직 완료되지 않았습니다.');
@@ -67,7 +64,7 @@ export default function FaceSelfTest() {
       const token = localStorage.getItem('accessToken');
       // 스타일 팁 POST 요청
       await axios.post(
-        'http://54.180.245.50/api/v0/style-tips',
+        '/api/v0/style-tips',
         {},
         {
           headers: {
@@ -77,7 +74,7 @@ export default function FaceSelfTest() {
       );
       // 얼굴 무드 저장
       await axios.post(
-        'http://54.180.245.50/api/v0/face-mood',
+        '/api/v0/face-mood',
         { faceMood },
         {
           headers: {

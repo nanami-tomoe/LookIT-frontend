@@ -78,7 +78,7 @@ export default function BodySelfTest() {
     try {
       const token = localStorage.getItem('accessToken');
       const res = await axios.post(
-        'http://54.180.245.50/api/v0/diagnosis',
+        '/api/v0/diagnosis',
         { bodyType },
         {
           headers: {
