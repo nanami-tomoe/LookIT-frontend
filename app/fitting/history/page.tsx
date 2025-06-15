@@ -34,7 +34,7 @@ export default function FittingHistory() {
       try {
         const token = localStorage.getItem('accessToken');
         const res = await axios.get(
-          'http://localhost:8080/api/v0/virtual-fitting/result',
+          'http://54.180.245.50/api/v0/virtual-fitting/result',
           {
             headers: {
               Authorization: `Bearer ${token}`,

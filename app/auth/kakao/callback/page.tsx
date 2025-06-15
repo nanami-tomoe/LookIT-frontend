@@ -25,7 +25,7 @@ function KakaoCallback() {
 
     if (code) {
       axios
-        .get('http://localhost:8080/api/auth/login/kakao', { params: { code } })
+        .get('http://54.180.245.50/api/auth/login/kakao', { params: { code } })
         .then((res: AxiosResponse) => {
           console.log('백엔드 응답:', res.data);
           const { data, status, success } = res.data;
@@ -69,4 +69,3 @@ export default function KakaoCallbackPage() {
     </Suspense>
   );
 }
- 

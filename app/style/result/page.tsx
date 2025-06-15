@@ -193,6 +193,9 @@ export default function StyleResult() {
   const [result, setResult] = useState<StyleResultData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const [stylingTips, setStylingTips] = useState<string | null>(null);
+  const [tipsLoading, setTipsLoading] = useState(true);
+  const [tipsError, setTipsError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchResult = async () => {
@@ -201,7 +204,7 @@ export default function StyleResult() {
       try {
         const token = localStorage.getItem('accessToken');
         const res = await axios.get(
-          'http://localhost:8080/api/v0/style-analysis/result',
+          'http://54.180.245.50/api/v0/style-analysis/result',
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -216,6 +219,27 @@ export default function StyleResult() {
       }
     };
     fetchResult();
+  }, []);
+
+  useEffect(() => {
+    const fetchTips = async () => {
+      setTipsLoading(true);
+      setTipsError(null);
+      try {
+        const token = localStorage.getItem('accessToken');
+        const res = await axios.get('http://54.180.245.50/api/v0/style-tips', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        setStylingTips(res.data?.stylingTips || null);
+      } catch (e) {
+        setTipsError('스타일 팁을 불러오지 못했습니다.');
+      } finally {
+        setTipsLoading(false);
+      }
+    };
+    fetchTips();
   }, []);
 
   return (
@@ -292,7 +316,21 @@ export default function StyleResult() {
                 01 체형 보완 스타일 팁
               </h2>
               <div className="w-full h-[1px] bg-[#E5E5EA] mb-8" />
-              <div className="text-[#aaa] text-base">(추후 제공 예정)</div>
+              {tipsLoading ? (
+                <div className="text-[#9B51E0] text-lg font-bold py-12">
+                  스타일 팁을 불러오는 중...
+                </div>
+              ) : tipsError ? (
+                <div className="text-red-500 text-lg font-bold py-12">
+                  {tipsError}
+                </div>
+              ) : stylingTips ? (
+                <div className="whitespace-pre-line text-[#333] text-[16px] leading-relaxed bg-white/80 rounded-xl p-6 shadow max-w-2xl mx-auto">
+                  {stylingTips}
+                </div>
+              ) : (
+                <div className="text-[#aaa] text-base">(추후 제공 예정)</div>
+              )}
             </div>
             <div className="mt-16">
               <h2 className="text-[22px] font-bold text-[#9B51E0] mb-4">
