@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 const Header = () => {
   const pathname = usePathname();
+  const router = useRouter();
   return (
     <div className="w-full flex flex-row items-center justify-between gap-4 px-8 py-5 z-10">
       <div className="flex flex-row items-center gap-4">
@@ -41,9 +42,9 @@ const Header = () => {
         >
           AI 가상 피팅
         </Link>
-        <Link
-          href="#"
+        <button
           className="w-8 h-8 flex items-center justify-center rounded-full hover:bg-[#22223a] transition group"
+          onClick={() => router.push('/fitting/history')}
         >
           <span
             className="text-white group-hover:bg-gradient-to-br group-hover:from-[#9B51E0] group-hover:to-[#3081ED] group-hover:bg-clip-text group-hover:text-transparent transition"
@@ -61,7 +62,7 @@ const Header = () => {
               style={{ filter: 'invert(1) brightness(2)' }}
             />
           </span>
-        </Link>
+        </button>
       </div>
     </div>
   );

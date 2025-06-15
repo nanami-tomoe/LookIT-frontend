@@ -3,10 +3,15 @@ import Background from '@/components/Background';
 import Header from '@/components/Header';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import axios from 'axios';
 
 export default function StyleUpload() {
   const [faceImage, setFaceImage] = useState<string | null>(null);
   const [bodyImage, setBodyImage] = useState<string | null>(null);
+  const [faceFile, setFaceFile] = useState<File | null>(null);
+  const [bodyFile, setBodyFile] = useState<File | null>(null);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
   const faceInputRef = useRef<HTMLInputElement>(null);
   const bodyInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
@@ -14,11 +19,57 @@ export default function StyleUpload() {
   const handleFaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setFaceImage(URL.createObjectURL(e.target.files[0]));
+      setFaceFile(e.target.files[0]);
     }
   };
   const handleBodyChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
       setBodyImage(URL.createObjectURL(e.target.files[0]));
+      setBodyFile(e.target.files[0]);
+    }
+  };
+
+  const handleNext = async () => {
+    if (!faceFile || !bodyFile) return;
+    setLoading(true);
+    setError(null);
+    try {
+      const token = localStorage.getItem('accessToken');
+      // 체형 분석 요청
+      const bodyForm = new FormData();
+      bodyForm.append('analysis', bodyFile);
+      const bodyRes = await axios.post(
+        'http://localhost:8080/api/v0/body-analysis',
+        bodyForm,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log('체형 분석 응답:', bodyRes.data);
+      // 얼굴 분석 요청
+      const faceForm = new FormData();
+      faceForm.append('analysis', faceFile);
+      const faceRes = await axios.post(
+        'http://localhost:8080/api/v0/face-analysis',
+        faceForm,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      console.log('얼굴 분석 응답:', faceRes.data);
+      router.push('/style/selftest/body');
+    } catch (e: any) {
+      setError(
+        e?.response?.data?.message || '이미지 분석 요청에 실패했습니다.'
+      );
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -114,11 +165,16 @@ export default function StyleUpload() {
         </div>
         <button
           className="mt-8 w-full max-w-[300px] h-14 rounded-[10px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-white font-semibold text-[18px] font-pretendard shadow hover:brightness-110 transition"
-          onClick={() => router.push('/style/selftest/body')}
-          disabled={!faceImage || !bodyImage}
+          onClick={handleNext}
+          disabled={!faceImage || !bodyImage || loading}
         >
-          다음 단계로
+          {loading ? '분석 중...' : '다음 단계로'}
         </button>
+        {error && (
+          <div className="mt-4 text-red-500 text-center text-[15px]">
+            {error}
+          </div>
+        )}
       </main>
     </div>
   );

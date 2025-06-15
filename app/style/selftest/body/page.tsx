@@ -27,7 +27,7 @@ export default function BodySelfTest() {
     'pelvis',
     'hand_feature',
   ];
-  const answerMap = {
+  const answerMap: Record<string, string[]> = {
     body_thickness: ['두께감 있음', '두께감 없음', '골격 다부짐'],
     muscle_fat_type: ['근육 잘 붙음', '지방 잘 붙음', '살 많지 않음'],
     neck_length: ['짧거나 보통', '얇고 김', '두껍고 근육 많음'],
