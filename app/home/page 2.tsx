@@ -4,40 +4,9 @@ import Image from 'next/image';
 import Background from '@/components/Background';
 import Header from '@/components/Header';
 import { useRouter } from 'next/navigation';
-import axios from 'axios';
-import { useState } from 'react';
 
 export default function MainHome() {
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
-
-  const handleStyleRecommend = async () => {
-    setLoading(true);
-    try {
-      const token = localStorage.getItem('accessToken');
-      const res = await axios.get('/api/v0/style-analysis/result', {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      const data = res.data?.data;
-      if (
-        data &&
-        data.bodyAnalysis &&
-        data.bodyType &&
-        data.faceShape &&
-        data.faceMood
-      ) {
-        router.push('/style/result');
-      } else {
-        router.push('/style');
-      }
-    } catch (e) {
-      router.push('/style');
-    } finally {
-      setLoading(false);
-    }
-  };
 
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-[#0B0B0F]">
@@ -91,10 +60,15 @@ export default function MainHome() {
             </div>
             <button
               className="mt-2 h-14 rounded-[10px] bg-[#b982ff] text-white font-semibold text-[16px] font-pretendard shadow hover:brightness-110 transition flex flex-row items-center justify-center gap-2 w-full"
-              onClick={handleStyleRecommend}
-              disabled={loading}
+              onClick={() => router.push('/style')}
             >
-              {loading ? '로딩 중...' : <span>Get Started →</span>}
+              <span>Get Started →</span>
+              {/* <Image
+                src="/arrow-right.svg"
+                alt="arrow"
+                width={24}
+                height={24}
+              /> */}
             </button>
           </div>
           {/* AI 가상 피팅 카드 */}

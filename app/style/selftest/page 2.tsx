@@ -20,6 +20,11 @@ export default function StyleSelfTest() {
         <h1 className="text-[32px] font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-center font-pretendard mb-2">
           AI 스타일 추천 - 자가진단
         </h1>
+        <div className="flex flex-row items-center justify-center w-full max-w-[500px] mx-auto mt-2 mb-0 select-none gap-[15px]">
+          <div className="w-[100px] h-[5px] rounded-[5px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED]" />
+          <div className="w-[100px] h-[5px] rounded-[5px] bg-[#D9D9D9]" />
+          <div className="w-[100px] h-[5px] rounded-[5px] bg-[#D9D9D9]" />
+        </div>
         <form className="flex flex-col gap-8 w-full">
           <div>
             <div className="text-[18px] font-semibold text-white mb-2">
