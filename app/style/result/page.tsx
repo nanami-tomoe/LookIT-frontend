@@ -234,8 +234,8 @@ export default function StyleResult() {
         },
       })
       .then((res) => {
-        if (res.data?.stylingTips) {
-          setStylingTips(res.data.stylingTips);
+        if (res.data?.data?.stylingTips) {
+          setStylingTips(res.data.data.stylingTips);
         } else {
           console.error('스타일 팁 응답 형식 오류:', res.data);
           setStylingTips(null);
@@ -283,16 +283,44 @@ export default function StyleResult() {
             AI 스타일 추천
           </div>
           <nav className="flex flex-col gap-0 w-full">
-            <div className="py-3 text-[#9B51E0] font-bold border-b border-[#E5E5EA] bg-[#f7f3ff]">
+            <div
+              className="py-3 text-[#9B51E0] font-bold border-b border-[#E5E5EA] bg-[#f7f3ff] cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById('section-00')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
               00 자가진단 및 머신러닝 분석 결과
             </div>
-            <div className="py-3 text-[#666] border-b border-[#E5E5EA] hover:bg-[#f7f3ff] cursor-pointer">
+            <div
+              className="py-3 text-[#666] border-b border-[#E5E5EA] hover:bg-[#f7f3ff] cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById('section-01')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
               01 체형 보완 스타일 팁
             </div>
-            <div className="py-3 text-[#666] border-b border-[#E5E5EA] hover:bg-[#f7f3ff] cursor-pointer">
+            <div
+              className="py-3 text-[#666] border-b border-[#E5E5EA] hover:bg-[#f7f3ff] cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById('section-02')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
               02 얼굴 분위기에 따른 추천 스타일
             </div>
-            <div className="py-3 text-[#666] hover:bg-[#f7f3ff] cursor-pointer">
+            <div
+              className="py-3 text-[#666] hover:bg-[#f7f3ff] cursor-pointer"
+              onClick={() =>
+                document
+                  .getElementById('section-03')
+                  ?.scrollIntoView({ behavior: 'smooth' })
+              }
+            >
               03 바디타입과 얼굴 분위기에 따른 브랜드 추천
             </div>
           </nav>
@@ -300,7 +328,10 @@ export default function StyleResult() {
         {/* 메인 컨텐츠 */}
         <main className="flex-1 flex flex-col items-center px-4 md:px-16 py-12">
           <div className="w-full max-w-5xl">
-            <h1 className="text-[28px] md:text-[32px] font-extrabold text-[#222] mb-2">
+            <h1
+              id="section-00"
+              className="text-[28px] md:text-[32px] font-extrabold text-[#222] mb-2"
+            >
               00 자가진단 및 머신러닝 분석 결과
             </h1>
             <div className="w-full h-[2px] bg-[#E5E5EA] mb-10" />
@@ -343,7 +374,10 @@ export default function StyleResult() {
             ) : null}
             {/* 01~03번 섹션 목차만 표시 */}
             <div className="mt-16">
-              <h2 className="text-[22px] font-bold text-[#9B51E0] mb-4">
+              <h2
+                id="section-01"
+                className="text-[22px] font-bold text-[#9B51E0] mb-4"
+              >
                 01 체형 보완 스타일 팁
               </h2>
               <div className="w-full h-[1px] bg-[#E5E5EA] mb-8" />
@@ -364,7 +398,10 @@ export default function StyleResult() {
               )}
             </div>
             <div className="mt-16">
-              <h2 className="text-[22px] font-bold text-[#9B51E0] mb-4">
+              <h2
+                id="section-02"
+                className="text-[22px] font-bold text-[#9B51E0] mb-4"
+              >
                 02 얼굴 분위기에 따른 추천 스타일
               </h2>
               <div className="w-full h-[1px] bg-[#E5E5EA] mb-8" />
@@ -425,7 +462,10 @@ export default function StyleResult() {
               )}
             </div>
             <div className="mt-16">
-              <h2 className="text-[22px] font-bold text-[#9B51E0] mb-4">
+              <h2
+                id="section-03"
+                className="text-[22px] font-bold text-[#9B51E0] mb-4"
+              >
                 03 바디타입과 얼굴 분위기에 따른 브랜드 추천
               </h2>
               <div className="w-full h-[1px] bg-[#E5E5EA] mb-8" />
