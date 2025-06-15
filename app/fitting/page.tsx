@@ -177,10 +177,6 @@ export default function Fitting() {
                 요청이 완료되었습니다!
                 <br />
                 <b>프로필 아이콘</b>에서 결과를 확인할 수 있습니다.
-                <br />
-                <span className="text-[#aaa] text-[13px]">
-                  (imageTaskId: {imageTaskId})
-                </span>
               </span>
               <button
                 className="w-full max-w-[380px] h-12 rounded-[8px] border border-[#b982ff] text-[#9B51E0] font-semibold text-[15px] font-inter bg-white hover:bg-[#f3f3fa] transition"

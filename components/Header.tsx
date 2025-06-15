@@ -10,9 +10,8 @@ const Header = ({ darkText = false }: HeaderProps) => {
   const pathname = usePathname();
   const router = useRouter();
   const textColor = darkText ? 'text-[#222]' : 'text-white';
-  const logoTextColor = darkText
-    ? 'text-[#222]'
-    : 'bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-transparent bg-clip-text';
+  const logoTextColor =
+    'bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-transparent bg-clip-text';
   return (
     <div className="w-full flex flex-row items-center justify-between gap-4 px-8 py-5 z-10">
       <div className="flex flex-row items-center gap-4">
