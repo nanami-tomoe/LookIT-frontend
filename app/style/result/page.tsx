@@ -352,30 +352,58 @@ export default function StyleResult() {
               </div>
             ) : result ? (
               <div className="grid grid-cols-1 md:grid-cols-2 gap-8 w-full max-w-3xl mx-auto mb-12">
-                {resultCardMeta.map((meta) => (
-                  <div
-                    key={meta.key}
-                    className={`rounded-2xl shadow-lg p-7 flex flex-col items-center justify-center min-h-[180px] ${meta.color} text-[#222] relative overflow-hidden`}
-                  >
-                    <div className="absolute right-4 top-4 opacity-10 text-[60px] pointer-events-none select-none">
-                      {meta.icon}
+                {resultCardMeta.map((meta) => {
+                  const value = result[meta.key as keyof StyleResultData];
+                  let desc = '';
+                  if (meta.key === 'bodyType' && value === 'STRAIGHT') {
+                    desc =
+                      '상체와 하체의 비율이 균형 잡혀 있고, 전체적으로 직선적인 실루엣이 특징입니다.';
+                  } else if (
+                    meta.key === 'bodyAnalysis' &&
+                    value === 'BALANCED_CURVY'
+                  ) {
+                    desc =
+                      '상체와 하체의 볼륨이 균형 있게 분포되어 있으며, 곡선미가 자연스럽게 드러나는 체형입니다.';
+                  } else if (
+                    meta.key === 'faceMood' &&
+                    value === 'STRAIGHT_SKELETON'
+                  ) {
+                    desc =
+                      '얼굴의 윤곽이 뚜렷하고, 턱선과 콧대 등 직선적인 라인이 강조되는 골격형입니다.';
+                  } else if (meta.key === 'faceShape' && value === 'OVAL') {
+                    desc =
+                      '얼굴 전체가 부드럽고 긴 타원 형태로, 이마와 턱이 둥글고 부드러운 인상을 줍니다.';
+                  }
+                  return (
+                    <div
+                      key={meta.key}
+                      className={`rounded-2xl shadow-lg p-7 flex flex-col items-center justify-center min-h-[180px] ${meta.color} text-[#222] relative overflow-hidden`}
+                    >
+                      <div className="absolute right-4 top-4 opacity-10 text-[60px] pointer-events-none select-none">
+                        {meta.icon}
+                      </div>
+                      <div className="flex flex-row items-center gap-3 z-10">
+                        <span className="text-[22px] font-bold">
+                          {meta.label}
+                        </span>
+                      </div>
+                      <div className="mt-4 text-[28px] font-extrabold text-[#222]">
+                        {meta.getText(value)}
+                      </div>
+                      <div className="mt-1 text-[16px] text-[#666] font-mono">
+                        {value || '-'}
+                      </div>
+                      <div className="mt-3 text-[15px] text-[#555] text-center">
+                        {meta.desc}
+                      </div>
+                      {desc && (
+                        <div className="mt-2 text-[14px] text-[#7a4cff] text-center font-medium">
+                          {desc}
+                        </div>
+                      )}
                     </div>
-                    <div className="flex flex-row items-center gap-3 z-10">
-                      <span className="text-[22px] font-bold">
-                        {meta.label}
-                      </span>
-                    </div>
-                    <div className="mt-4 text-[28px] font-extrabold text-[#222]">
-                      {meta.getText(result[meta.key as keyof StyleResultData])}
-                    </div>
-                    <div className="mt-1 text-[16px] text-[#666] font-mono">
-                      {result[meta.key as keyof StyleResultData] || '-'}
-                    </div>
-                    <div className="mt-3 text-[15px] text-[#555] text-center">
-                      {meta.desc}
-                    </div>
-                  </div>
-                ))}
+                  );
+                })}
               </div>
             ) : null}
             {/* 01~03번 섹션 목차만 표시 */}
@@ -397,25 +425,35 @@ export default function StyleResult() {
                 </div>
               ) : stylingTips ? (
                 <>
-                  <div className="whitespace-pre-line text-[#333] text-[16px] leading-relaxed bg-white/80 rounded-xl p-6 shadow max-w-2xl mx-auto">
-                    {stylingTips}
-                  </div>
                   {result &&
                     result.bodyAnalysis === 'BALANCED_CURVY' &&
                     result.bodyType === 'STRAIGHT' && (
-                      <div className="flex flex-row justify-center items-center gap-6 mt-6">
-                        <img
-                          src="/balanced_curvy.svg"
-                          alt="균형 볼륨형 예시"
-                          className="w-40 h-40 object-contain"
-                        />
-                        <img
-                          src="/straight.svg"
-                          alt="스트레이트 예시"
-                          className="w-40 h-40 object-contain"
-                        />
+                      <div className="flex flex-row justify-center items-end gap-6 mb-6">
+                        <div className="flex flex-col items-center">
+                          <img
+                            src="/balanced_curvy.svg"
+                            alt="균형 볼륨형 예시"
+                            className="w-40 h-40 object-contain"
+                          />
+                          <span className="mt-2 text-[15px] text-[#555] font-semibold">
+                            균형 볼륨형
+                          </span>
+                        </div>
+                        <div className="flex flex-col items-center">
+                          <img
+                            src="/straight.svg"
+                            alt="스트레이트 예시"
+                            className="w-40 h-40 object-contain"
+                          />
+                          <span className="mt-2 text-[15px] text-[#555] font-semibold">
+                            스트레이트
+                          </span>
+                        </div>
                       </div>
                     )}
+                  <div className="whitespace-pre-line text-[#333] text-[16px] leading-relaxed bg-white/80 rounded-xl p-6 shadow max-w-2xl mx-auto">
+                    {stylingTips}
+                  </div>
                 </>
               ) : (
                 <div className="text-[#aaa] text-base">(추후 제공 예정)</div>
