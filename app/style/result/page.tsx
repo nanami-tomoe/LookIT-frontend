@@ -396,9 +396,27 @@ export default function StyleResult() {
                   {tipsError}
                 </div>
               ) : stylingTips ? (
-                <div className="whitespace-pre-line text-[#333] text-[16px] leading-relaxed bg-white/80 rounded-xl p-6 shadow max-w-2xl mx-auto">
-                  {stylingTips}
-                </div>
+                <>
+                  <div className="whitespace-pre-line text-[#333] text-[16px] leading-relaxed bg-white/80 rounded-xl p-6 shadow max-w-2xl mx-auto">
+                    {stylingTips}
+                  </div>
+                  {result &&
+                    result.bodyAnalysis === 'BALANCED_CURVY' &&
+                    result.bodyType === 'STRAIGHT' && (
+                      <div className="flex flex-row justify-center items-center gap-6 mt-6">
+                        <img
+                          src="/balanced_curvy.svg"
+                          alt="균형 볼륨형 예시"
+                          className="w-40 h-40 object-contain"
+                        />
+                        <img
+                          src="/straight.svg"
+                          alt="스트레이트 예시"
+                          className="w-40 h-40 object-contain"
+                        />
+                      </div>
+                    )}
+                </>
               ) : (
                 <div className="text-[#aaa] text-base">(추후 제공 예정)</div>
               )}
