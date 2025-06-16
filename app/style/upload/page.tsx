@@ -5,6 +5,8 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
+const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`;
+
 // axios 401, 500 인터셉터: 토큰 만료 또는 서버 에러 시 자동 로그아웃 및 로그인 페이지 이동
 if (typeof window !== 'undefined') {
   axios.interceptors.response.use(
@@ -17,7 +19,7 @@ if (typeof window !== 'undefined') {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('isMember');
-        window.location.href = '/login';
+        window.location.href = KAKAO_AUTH_URL;
       }
       return Promise.reject(error);
     }
