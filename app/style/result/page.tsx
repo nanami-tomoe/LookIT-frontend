@@ -336,7 +336,11 @@ export default function StyleResult() {
           <div className="w-full max-w-5xl">
             <h1
               id="section-00"
-              className="text-[28px] md:text-[32px] font-extrabold text-[#222] mb-2"
+              className={`text-[28px] md:text-[32px] font-extrabold mb-2 transition ${
+                selectedSection === 'section-00'
+                  ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
+                  : 'text-[#222]'
+              }`}
             >
               00 자가진단 및 머신러닝 분석 결과
             </h1>
@@ -377,7 +381,7 @@ export default function StyleResult() {
                   return (
                     <div
                       key={meta.key}
-                      className={`rounded-2xl shadow-lg p-7 flex flex-col items-center justify-center min-h-[180px] ${meta.color} text-[#222] relative overflow-hidden`}
+                      className="rounded-2xl bg-white border border-[#E5E5EA] shadow p-7 flex flex-col items-center justify-center min-h-[180px] text-[#222] relative overflow-hidden"
                     >
                       <div className="absolute right-4 top-4 opacity-10 text-[60px] pointer-events-none select-none">
                         {meta.icon}
@@ -410,7 +414,11 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-01"
-                className="text-[22px] font-bold text-[#9B51E0] mb-4"
+                className={`text-[22px] font-bold mb-4 transition ${
+                  selectedSection === 'section-01'
+                    ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
+                    : 'text-[#9B51E0]'
+                }`}
               >
                 01 체형 보완 스타일 팁
               </h2>
@@ -462,7 +470,11 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-02"
-                className="text-[22px] font-bold text-[#9B51E0] mb-4"
+                className={`text-[22px] font-bold mb-4 transition ${
+                  selectedSection === 'section-02'
+                    ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
+                    : 'text-[#9B51E0]'
+                }`}
               >
                 02 얼굴 분위기에 따른 추천 스타일
               </h2>
@@ -526,7 +538,11 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-03"
-                className="text-[22px] font-bold text-[#9B51E0] mb-4"
+                className={`text-[22px] font-bold mb-4 transition ${
+                  selectedSection === 'section-03'
+                    ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
+                    : 'text-[#9B51E0]'
+                }`}
               >
                 03 바디타입과 얼굴 분위기에 따른 브랜드 추천
               </h2>
