@@ -5,7 +5,11 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
-const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY}&redirect_uri=${process.env.NEXT_PUBLIC_KAKAO_REDIRECT_URI}&response_type=code`;
+const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '';
+const LOGIN_REDIRECT = process.env.NEXT_PUBLIC_KAKAO_LOGIN_REDIRECT || '';
+const KAKAO_LOGOUT_URL = `https://kauth.kakao.com/oauth/logout?client_id=${REST_API_KEY}&logout_redirect_uri=${encodeURIComponent(
+  LOGIN_REDIRECT
+)}`;
 
 // axios 401, 500 인터셉터: 토큰 만료 또는 서버 에러 시 자동 로그아웃 및 로그인 페이지 이동
 if (typeof window !== 'undefined') {
@@ -19,7 +23,7 @@ if (typeof window !== 'undefined') {
         localStorage.removeItem('accessToken');
         localStorage.removeItem('refreshToken');
         localStorage.removeItem('isMember');
-        window.location.href = KAKAO_AUTH_URL;
+        window.location.href = KAKAO_LOGOUT_URL;
       }
       return Promise.reject(error);
     }
