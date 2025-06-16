@@ -44,7 +44,7 @@ const Header = ({
             스타일 추천
           </span>
           <Link
-            href="/fitting/new"
+            href="/fitting"
             className={`text-[16px] font-pretendard transition ${textColor}
               hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
           >
@@ -152,7 +152,7 @@ const Header = ({
             스타일 추천
           </span>
           <Link
-            href="/fitting/new"
+            href="/fitting"
             className={`text-[16px] font-pretendard transition ${textColor}
               hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
           >
@@ -221,7 +221,7 @@ const Header = ({
           스타일 추천
         </Link>
         <Link
-          href="/fitting/new"
+          href="/fitting"
           className={`text-[16px] font-pretendard transition ${textColor} ${
             pathname === '/fitting'
               ? 'font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent'
