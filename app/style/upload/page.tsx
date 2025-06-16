@@ -4,6 +4,7 @@ import Header from '@/components/Header';
 import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
+import { FaRegQuestionCircle } from 'react-icons/fa';
 
 const REST_API_KEY = process.env.NEXT_PUBLIC_KAKAO_REST_API_KEY || '';
 const LOGIN_REDIRECT = process.env.NEXT_PUBLIC_KAKAO_LOGIN_REDIRECT || '';
@@ -138,10 +139,11 @@ export default function StyleUpload() {
             <div className="mt-2 flex flex-row items-center gap-2 w-full">
               <button
                 type="button"
-                className="text-[#898CA9] text-[13px] underline hover:text-[#9B51E0] transition font-medium"
+                className="text-[#898CA9] text-[13px] underline hover:text-[#9B51E0] transition font-medium flex items-center gap-1"
                 onClick={() => setShowModal('face')}
                 aria-label="얼굴 사진 주의사항 보기"
               >
+                <FaRegQuestionCircle className="inline-block text-[#9B51E0] text-[15px] mb-[2px]" />
                 설명 보기
               </button>
             </div>
@@ -177,10 +179,11 @@ export default function StyleUpload() {
             <div className="mt-2 flex flex-row items-center gap-2 w-full">
               <button
                 type="button"
-                className="text-[#898CA9] text-[13px] underline hover:text-[#9B51E0] transition font-medium"
+                className="text-[#898CA9] text-[13px] underline hover:text-[#9B51E0] transition font-medium flex items-center gap-1"
                 onClick={() => setShowModal('body')}
                 aria-label="체형 사진 주의사항 보기"
               >
+                <FaRegQuestionCircle className="inline-block text-[#9B51E0] text-[15px] mb-[2px]" />
                 설명 보기
               </button>
             </div>
@@ -236,7 +239,12 @@ export default function StyleUpload() {
                   </li>
                   <li className="mt-2">아래는 예시 이미지입니다.</li>
                   <img
-                    src="/ex.jpg"
+                    src="/ex.png"
+                    alt="체형 사진 예시 썸네일"
+                    className="w-8 h-8 object-cover rounded"
+                  />
+                  <img
+                    src="/ex.png"
                     alt="체형 사진 예시"
                     className="w-48 h-48 object-contain rounded border mt-2 mb-2 mx-auto"
                   />
