@@ -337,9 +337,7 @@ export default function StyleResult() {
             <h1
               id="section-00"
               className={`text-[28px] md:text-[32px] font-extrabold mb-2 transition ${
-                selectedSection === 'section-00'
-                  ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
-                  : 'text-[#222]'
+                selectedSection === 'section-00' ? 'scale-110' : ''
               }`}
             >
               00 자가진단 및 머신러닝 분석 결과
@@ -414,10 +412,8 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-01"
-                className={`text-[22px] font-bold mb-4 transition ${
-                  selectedSection === 'section-01'
-                    ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
-                    : 'text-[#9B51E0]'
+                className={`text-[28px] md:text-[32px] font-extrabold mb-4 transition ${
+                  selectedSection === 'section-01' ? 'scale-110' : ''
                 }`}
               >
                 01 체형 보완 스타일 팁
@@ -470,10 +466,8 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-02"
-                className={`text-[22px] font-bold mb-4 transition ${
-                  selectedSection === 'section-02'
-                    ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
-                    : 'text-[#9B51E0]'
+                className={`text-[28px] md:text-[32px] font-extrabold mb-4 transition ${
+                  selectedSection === 'section-02' ? 'scale-110' : ''
                 }`}
               >
                 02 얼굴 분위기에 따른 추천 스타일
@@ -538,10 +532,8 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-03"
-                className={`text-[22px] font-bold mb-4 transition ${
-                  selectedSection === 'section-03'
-                    ? 'text-white bg-[#9B51E0] px-3 py-1 rounded shadow'
-                    : 'text-[#9B51E0]'
+                className={`text-[28px] md:text-[32px] font-extrabold mb-4 transition ${
+                  selectedSection === 'section-03' ? 'scale-110' : ''
                 }`}
               >
                 03 바디타입과 얼굴 분위기에 따른 브랜드 추천
