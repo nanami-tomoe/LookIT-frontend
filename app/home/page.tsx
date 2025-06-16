@@ -121,7 +121,7 @@ export default function MainHome() {
             </div>
             <button
               className="mt-2 h-14 rounded-[10px] bg-[#b982ff] text-white font-semibold text-[16px] font-pretendard shadow hover:brightness-110 transition flex flex-row items-center justify-center gap-2 w-full"
-              onClick={() => router.push('/fitting')}
+              onClick={() => router.push('/fitting/new')}
             >
               <span>Get Started →</span>
               {/* <Image
