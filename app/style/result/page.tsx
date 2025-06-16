@@ -281,7 +281,7 @@ export default function StyleResult() {
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#F5F5F7]">
-      <Header darkText />
+      <Header darkText resultPageMode={true} />
       <div className="flex flex-row w-full min-h-screen">
         {/* 좌측 사이드바 목차 */}
         <aside className="hidden md:flex flex-col w-[260px] bg-white border-r border-[#E5E5EA] py-12 px-8 gap-8 sticky top-0 h-screen z-20 shadow-sm">
