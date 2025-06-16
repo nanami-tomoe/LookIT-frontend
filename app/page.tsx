@@ -2,25 +2,12 @@
 
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+// import { useEffect } from 'react';
 import Background from '@/components/Background';
 // import Header from '@/components/Header';
 
 export default function Home() {
   const router = useRouter();
-
-  useEffect(() => {
-    // 클라이언트에서만 localStorage 접근
-    if (typeof window !== 'undefined') {
-      const accessToken = localStorage.getItem('accessToken');
-      const isMember = localStorage.getItem('isMember');
-      if (accessToken && isMember === 'true') {
-        router.replace('/home');
-      } else if (accessToken && isMember !== 'true') {
-        router.replace('/join');
-      }
-    }
-  }, [router]);
 
   const handleKakaoLogin = () => {
     // 카카오 로그인 URL로 이동
