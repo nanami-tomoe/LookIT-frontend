@@ -281,7 +281,7 @@ export default function StyleResult() {
 
   return (
     <div className="relative min-h-screen flex flex-col bg-[#F5F5F7]">
-      <Header darkText resultPageMode={true} />
+      <Header darkText resultPageMode={true} stylePageMode={true} />
       <div className="flex flex-row w-full min-h-screen">
         {/* 좌측 사이드바 목차 */}
         <aside className="hidden md:flex flex-col w-[260px] bg-white border-r border-[#E5E5EA] py-12 px-8 gap-8 sticky top-0 h-screen z-20 shadow-sm">
@@ -336,7 +336,7 @@ export default function StyleResult() {
           <div className="w-full max-w-5xl">
             <h1
               id="section-00"
-              className={`text-[28px] md:text-[32px] font-extrabold mb-2 transition ${
+              className={`text-[24px] md:text-[28px] font-extrabold mb-2 transition ${
                 selectedSection === 'section-00' ? 'scale-110' : ''
               }`}
             >
@@ -412,7 +412,7 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-01"
-                className={`text-[28px] md:text-[32px] font-extrabold mb-4 transition ${
+                className={`text-[24px] md:text-[28px] font-extrabold mb-4 transition ${
                   selectedSection === 'section-01' ? 'scale-110' : ''
                 }`}
               >
@@ -466,7 +466,7 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-02"
-                className={`text-[28px] md:text-[32px] font-extrabold mb-4 transition ${
+                className={`text-[24px] md:text-[28px] font-extrabold mb-4 transition ${
                   selectedSection === 'section-02' ? 'scale-110' : ''
                 }`}
               >
@@ -532,7 +532,7 @@ export default function StyleResult() {
             <div className="mt-16">
               <h2
                 id="section-03"
-                className={`text-[28px] md:text-[32px] font-extrabold mb-4 transition ${
+                className={`text-[24px] md:text-[28px] font-extrabold mb-4 transition ${
                   selectedSection === 'section-03' ? 'scale-110' : ''
                 }`}
               >

@@ -93,7 +93,7 @@ export default function FaceSelfTest() {
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-[#0B0B0F]">
       <Background />
-      <Header />
+      <Header stylePageMode={true} />
       <main className="flex-1 flex flex-col items-center justify-center relative z-10 w-full max-w-[600px] mx-auto gap-12 px-4">
         <h1 className="text-[32px] font-extrabold text-transparent bg-clip-text bg-gradient-to-br from-[#9B51E0] to-[#3081ED] text-center font-pretendard mb-2">
           얼굴형 분석 자가진단

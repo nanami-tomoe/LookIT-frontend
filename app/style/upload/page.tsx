@@ -40,7 +40,7 @@ export default function StyleUpload() {
   const faceInputRef = useRef<HTMLInputElement>(null);
   const bodyInputRef = useRef<HTMLInputElement>(null);
   const router = useRouter();
-  const [showModal, setShowModal] = useState(false);
+  const [showModal, setShowModal] = useState<null | 'face' | 'body'>(null);
 
   const handleFaceChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.files && e.target.files[0]) {
@@ -95,7 +95,7 @@ export default function StyleUpload() {
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-[#0B0B0F]">
       <Background />
-      <Header />
+      <Header stylePageMode={true} />
       {/* 얇은 선 3개만 가로로 나란히 (헤더 바로 아래) */}
       <div className="flex flex-row items-center justify-center w-full max-w-[500px] mx-auto mt-2 mb-0 select-none gap-[15px]">
         <div className="w-[100px] h-[5px] rounded-[5px] bg-gradient-to-br from-[#9B51E0] to-[#3081ED]" />
@@ -136,12 +136,14 @@ export default function StyleUpload() {
               )}
             </div>
             <div className="mt-2 flex flex-row items-center gap-2 w-full">
-              <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#982dec] via-[#dc8df8] to-[#a9c4f3] flex items-center justify-center">
-                <span className="text-white text-xs font-bold">i</span>
-              </div>
-              <span className="text-[#898CA9] text-[13px]">
-                정면 사진, 얼굴이 잘 드러나는 환경
-              </span>
+              <button
+                type="button"
+                className="text-[#898CA9] text-[13px] underline hover:text-[#9B51E0] transition font-medium"
+                onClick={() => setShowModal('face')}
+                aria-label="얼굴 사진 주의사항 보기"
+              >
+                설명 보기
+              </button>
             </div>
           </div>
           {/* 체형 사진 업로드 */}
@@ -172,53 +174,15 @@ export default function StyleUpload() {
                 </span>
               )}
             </div>
-            <div className="mt-2 flex flex-col items-start gap-2 w-full">
-              <div className="flex flex-row items-center gap-2">
-                <div className="w-6 h-6 rounded-full bg-gradient-to-br from-[#982dec] via-[#dc8df8] to-[#a9c4f3] flex items-center justify-center">
-                  <span className="text-white text-xs font-bold">i</span>
-                </div>
-                <span className="text-[#898CA9] text-[13px]">
-                  반드시 머리부터 발끝까지 나오고, 달라붙는 옷을 입고 양쪽 팔이
-                  몸에서 떨어져 있어야 해요.
-                </span>
-                <button
-                  type="button"
-                  className="ml-2 p-0.5 rounded hover:bg-[#f3f3fa] border border-[#e5e5e5] transition"
-                  onClick={() => setShowModal(true)}
-                  aria-label="체형 사진 예시 크게 보기"
-                >
-                  <img
-                    src="/ex.jpg"
-                    alt="체형 사진 예시 썸네일"
-                    className="w-8 h-8 object-cover rounded"
-                  />
-                </button>
-              </div>
-              {/* 모달 */}
-              {showModal && (
-                <div
-                  className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
-                  onClick={() => setShowModal(false)}
-                >
-                  <div
-                    className="bg-white rounded-lg p-4 max-w-[90vw] max-h-[90vh] flex flex-col items-center relative"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    <img
-                      src="/ex.jpg"
-                      alt="체형 사진 예시 크게 보기"
-                      className="max-w-[80vw] max-h-[70vh] object-contain rounded"
-                    />
-                    <button
-                      className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl font-bold"
-                      onClick={() => setShowModal(false)}
-                      aria-label="닫기"
-                    >
-                      ×
-                    </button>
-                  </div>
-                </div>
-              )}
+            <div className="mt-2 flex flex-row items-center gap-2 w-full">
+              <button
+                type="button"
+                className="text-[#898CA9] text-[13px] underline hover:text-[#9B51E0] transition font-medium"
+                onClick={() => setShowModal('body')}
+                aria-label="체형 사진 주의사항 보기"
+              >
+                설명 보기
+              </button>
             </div>
           </div>
         </div>
@@ -235,6 +199,60 @@ export default function StyleUpload() {
           </div>
         )}
       </main>
+      {/* 설명 모달 */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          onClick={() => setShowModal(null)}
+        >
+          <div
+            className="bg-white rounded-lg p-6 max-w-[90vw] max-h-[90vh] flex flex-col items-center relative min-w-[320px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-lg font-bold mb-3 text-[#9B51E0]">
+              {showModal === 'face'
+                ? '얼굴 사진 업로드 주의사항'
+                : '체형 사진 업로드 주의사항'}
+            </h3>
+            <ul className="text-[15px] text-[#333] mb-3 list-disc pl-5 text-left w-full max-w-md">
+              <li>
+                업로드 파일 이름에 <b>한글이 포함되면 안 됩니다</b>.
+              </li>
+              <li>
+                확장자는 <b>jpg, jpeg, png, webp, gif, avif</b>만 가능합니다.
+              </li>
+              <li>
+                뒷배경이 <b>깔끔할수록</b> 좋아요.
+              </li>
+              {showModal === 'face' ? (
+                <>
+                  <li>정면 사진, 얼굴이 잘 드러나는 환경에서 촬영해 주세요.</li>
+                </>
+              ) : (
+                <>
+                  <li>
+                    반드시 <b>머리부터 발끝까지</b> 나오고, <b>달라붙는 옷</b>을
+                    입고 <b>양쪽 팔이 몸에서 떨어져</b> 있어야 해요.
+                  </li>
+                  <li className="mt-2">아래는 예시 이미지입니다.</li>
+                  <img
+                    src="/ex.jpg"
+                    alt="체형 사진 예시"
+                    className="w-48 h-48 object-contain rounded border mt-2 mb-2 mx-auto"
+                  />
+                </>
+              )}
+            </ul>
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl font-bold"
+              onClick={() => setShowModal(null)}
+              aria-label="닫기"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

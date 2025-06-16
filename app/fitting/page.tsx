@@ -70,7 +70,7 @@ export default function Fitting() {
   return (
     <div className="relative min-h-screen flex flex-col overflow-hidden bg-[#0B0B0F]">
       <Background />
-      <Header />
+      <Header fittingPageMode={true} />
       <main className="flex-1 flex flex-col items-center justify-center relative z-10 w-full max-w-[900px] mx-auto gap-12 px-4">
         <div className="flex flex-row w-full gap-8 justify-center items-start">
           {/* 내 사진 업로드 영역 */}
