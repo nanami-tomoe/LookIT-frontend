@@ -5,6 +5,22 @@ import { useRef, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import axios from 'axios';
 
+// axios 401 인터셉터: 토큰 만료 시 자동 로그아웃 및 로그인 페이지 이동
+if (typeof window !== 'undefined') {
+  axios.interceptors.response.use(
+    (response) => response,
+    (error) => {
+      if (error.response && error.response.status === 401) {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('refreshToken');
+        localStorage.removeItem('isMember');
+        window.location.href = '/login';
+      }
+      return Promise.reject(error);
+    }
+  );
+}
+
 export default function StyleUpload() {
   const [faceImage, setFaceImage] = useState<string | null>(null);
   const [bodyImage, setBodyImage] = useState<string | null>(null);
