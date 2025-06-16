@@ -5,6 +5,7 @@ import Header from '@/components/Header';
 import Image from 'next/image';
 import { useRef, useState } from 'react';
 import axios from 'axios';
+import { FaRegQuestionCircle } from 'react-icons/fa';
 
 export default function Fitting() {
   const [userImage, setUserImage] = useState<string | null>(null);
@@ -16,6 +17,7 @@ export default function Fitting() {
   >('idle');
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [imageTaskId, setImageTaskId] = useState<string | null>(null);
+  const [showModal, setShowModal] = useState<null | 'user' | 'cloth'>(null);
   const userInputRef = useRef<HTMLInputElement>(null);
   const clothInputRef = useRef<HTMLInputElement>(null);
 
@@ -103,14 +105,16 @@ export default function Fitting() {
                 </span>
               )}
             </div>
-            <div className="mt-2 flex flex-row items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#982dec] via-[#dc8df8] to-[#a9c4f3] flex items-center justify-center">
-                {/* 안내 아이콘(임시) */}
-                <span className="text-white text-lg font-bold">i</span>
-              </div>
-              <span className="text-[#898CA9] text-[14px]">
-                배경이 깔끔하고 정면이 잘 나온 사진을 권장해요
-              </span>
+            <div className="mt-2 flex flex-row items-center gap-2 w-full">
+              <button
+                type="button"
+                className="text-[#898CA9] text-[14px] underline hover:text-[#9B51E0] transition font-medium flex items-center gap-1"
+                onClick={() => setShowModal('user')}
+                aria-label="옷을 입힐 사진 주의사항 보기"
+              >
+                <FaRegQuestionCircle className="inline-block text-[#9B51E0] text-[16px] mb-[2px]" />
+                설명 보기
+              </button>
             </div>
           </section>
 
@@ -144,14 +148,16 @@ export default function Fitting() {
                 </span>
               )}
             </div>
-            <div className="mt-2 flex flex-row items-center gap-2">
-              <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#982dec] via-[#dc8df8] to-[#a9c4f3] flex items-center justify-center">
-                {/* 안내 아이콘(임시) */}
-                <span className="text-white text-lg font-bold">i</span>
-              </div>
-              <span className="text-[#898CA9] text-[14px]">
-                정면이 잘 보이고 옷만 단독으로 있는 이미지를 권장해요
-              </span>
+            <div className="mt-2 flex flex-row items-center gap-2 w-full">
+              <button
+                type="button"
+                className="text-[#898CA9] text-[14px] underline hover:text-[#9B51E0] transition font-medium flex items-center gap-1"
+                onClick={() => setShowModal('cloth')}
+                aria-label="의류 사진 주의사항 보기"
+              >
+                <FaRegQuestionCircle className="inline-block text-[#9B51E0] text-[16px] mb-[2px]" />
+                설명 보기
+              </button>
             </div>
           </section>
         </div>
@@ -193,6 +199,54 @@ export default function Fitting() {
           )}
         </div>
       </main>
+      {/* 설명 모달 */}
+      {showModal && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          onClick={() => setShowModal(null)}
+        >
+          <div
+            className="bg-white rounded-lg p-6 max-w-[90vw] max-h-[90vh] flex flex-col items-center relative min-w-[320px]"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h3 className="text-lg font-bold mb-3 text-[#9B51E0]">
+              {showModal === 'user'
+                ? '옷을 입힐 사진 업로드 주의사항'
+                : '의류 사진 업로드 주의사항'}
+            </h3>
+            <ul className="text-[15px] text-[#333] mb-3 list-disc pl-5 text-left w-full max-w-md">
+              <li>
+                배경이 <b>깔끔</b>할수록 좋아요.
+              </li>
+              <li>
+                파일명에 <b>한글이 포함되면 안 됩니다</b>.
+              </li>
+              <li>
+                확장자는 <b>jpg, jpeg, png, webp, gif, avif</b>만 가능합니다.
+              </li>
+              <li>
+                <b>해상도가 높고 선명한</b> 사진을 권장해요.
+              </li>
+              {showModal === 'user' ? (
+                <li>
+                  <b>정면을 바라보고 있는</b> 사진이면 좋아요.
+                </li>
+              ) : (
+                <li>
+                  <b>옷만 단독으로 나온</b> 사진을 권장해요.
+                </li>
+              )}
+            </ul>
+            <button
+              className="absolute top-2 right-2 text-gray-500 hover:text-black text-2xl font-bold"
+              onClick={() => setShowModal(null)}
+              aria-label="닫기"
+            >
+              ×
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
