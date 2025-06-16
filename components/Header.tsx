@@ -40,13 +40,25 @@ const Header = ({
           </Link>
         </div>
         <div className="flex flex-row items-center gap-8">
-          <span className="text-[16px] font-pretendard font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent cursor-default select-none px-1">
+          <span
+            className="text-[16px] font-pretendard font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent cursor-default select-none px-1"
+            style={{
+              minWidth: '90px',
+              display: 'inline-block',
+              textAlign: 'center',
+            }}
+          >
             스타일 추천
           </span>
           <Link
             href="/fitting"
             className={`text-[16px] font-pretendard transition ${textColor}
               hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
+            style={{
+              minWidth: '90px',
+              display: 'inline-block',
+              textAlign: 'center',
+            }}
           >
             AI 가상 피팅
           </Link>
@@ -93,10 +105,22 @@ const Header = ({
             href="/style"
             className={`text-[16px] font-pretendard transition ${textColor}
               hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
+            style={{
+              minWidth: '90px',
+              display: 'inline-block',
+              textAlign: 'center',
+            }}
           >
             스타일 추천
           </Link>
-          <span className="text-[16px] font-pretendard font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent cursor-default select-none px-1">
+          <span
+            className="text-[16px] font-pretendard font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent cursor-default select-none px-1"
+            style={{
+              minWidth: '90px',
+              display: 'inline-block',
+              textAlign: 'center',
+            }}
+          >
             AI 가상 피팅
           </span>
           <button
@@ -148,13 +172,25 @@ const Header = ({
           </Link>
         </div>
         <div className="flex flex-row items-center gap-8">
-          <span className="text-[16px] font-pretendard font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent cursor-default select-none px-1">
+          <span
+            className="text-[16px] font-pretendard font-bold bg-gradient-to-br from-[#9B51E0] to-[#3081ED] bg-clip-text text-transparent cursor-default select-none px-1"
+            style={{
+              minWidth: '90px',
+              display: 'inline-block',
+              textAlign: 'center',
+            }}
+          >
             스타일 추천
           </span>
           <Link
             href="/fitting"
             className={`text-[16px] font-pretendard transition ${textColor}
               hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
+            style={{
+              minWidth: '90px',
+              display: 'inline-block',
+              textAlign: 'center',
+            }}
           >
             AI 가상 피팅
           </Link>
@@ -217,6 +253,11 @@ const Header = ({
               : 'font-medium'
           }
             hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
+          style={{
+            minWidth: '90px',
+            display: 'inline-block',
+            textAlign: 'center',
+          }}
         >
           스타일 추천
         </Link>
@@ -230,6 +271,11 @@ const Header = ({
               : 'font-medium'
           }
             hover:font-bold hover:bg-gradient-to-br hover:from-[#9B51E0] hover:to-[#3081ED] hover:bg-clip-text hover:text-transparent`}
+          style={{
+            minWidth: '90px',
+            display: 'inline-block',
+            textAlign: 'center',
+          }}
         >
           AI 가상 피팅
         </Link>
